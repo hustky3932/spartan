@@ -6,6 +6,7 @@ import { initCharacter } from './init';
 import { communityInvestorPlugin } from './plugins/communityInvestor';
 import { degenIntelPlugin } from './plugins/degenIntel';
 import { degenTraderPlugin } from './plugins/degenTrader';
+import { heliusPlugin } from './plugins/helius';
 
 import { autofunPlugin } from './plugins/autofun';
 import { autofunTraderPlugin } from './plugins/autofunTrader';
@@ -540,6 +541,7 @@ const config: OnboardingConfig = {
 
 export const spartan: ProjectAgent = {
   plugins: [
+    heliusPlugin,
     degenTraderPlugin,
     degenIntelPlugin, // has to be after trader for buy/sell signals to be enabled
     autofunPlugin,
