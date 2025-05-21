@@ -1,0 +1,13 @@
+.env
+*.env
+.env*
+/data
+/generatedImages
+
+node_modules/
+
+local_**
+cache/*
+models/*
+
+dist/*
