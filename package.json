@@ -1,5 +1,5 @@
 {
-  "name": "@elizaos/the-org",
+  "name": "@elizaos/spartan",
   "version": "1.0.0-beta.52",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -9,21 +9,15 @@
     "access": "public"
   },
   "scripts": {
-    "start": "bun ../cli/dist/index.js start",
+    "start": "elizaos start",
     "build": "vite build && tsup",
     "lint": "prettier --write ./src",
-    "dev": "bun ../cli/dist/index.js dev",
-    "test": "bun ../cli/dist/index.js test",
+    "dev": "elizaos dev",
+    "test": "elizaos test && bun run test:spartan",
     "clean": "rm -rf dist .turbo node_modules .turbo-tsconfig.json tsconfig.tsbuildinfo",
     "format": "prettier --write ./src",
     "format:check": "prettier --check ./src",
-    "test:communityManager": "vitest tests/communityManager.test.ts",
-    "test:devRel": "vitest tests/devRel.test.ts",
-    "test:spartan": "vitest tests/spartan.test.ts",
-    "test:liaison": "vitest tests/liaison.test.ts",
-    "test:projectManager": "vitest tests/projectManager.test.ts",
-    "test:socialMediaManager": "vitest tests/socialMediaManager.test.ts",
-    "test:the-org": "vitest tests/communityManager.test.ts tests/devRel.test.ts tests/spartan.test.ts tests/liaison.test.ts tests/projectManager.test.ts tests/socialMediaManager.test.ts"
+    "test:spartan": "vitest tests/spartan.test.ts"
   },
   "nodemonConfig": {
     "watch": [
