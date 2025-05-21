@@ -1,5 +1,6 @@
 import type { IAgentRuntime, Memory, Provider, State } from '@elizaos/core';
 import type { IToken } from '../types';
+import { logger } from '@sentry/browser';
 
 /**
  * Provider for Birdeye trending coins

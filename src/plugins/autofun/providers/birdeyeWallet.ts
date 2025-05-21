@@ -1,6 +1,5 @@
-import type { Action, IAgentRuntime, Memory, Provider, State } from '@elizaos/core';
-import { addHeader, composeActionExamples, formatActionNames, formatActions } from '@elizaos/core';
-import type { IToken } from '../types';
+import type { IAgentRuntime, Memory, Provider, State } from '@elizaos/core';
+import { Portfolio, TransactionHistory } from '../tasks/birdeye';
 
 /**
  * Provider for Birdeye trending coins
@@ -34,7 +33,7 @@ export const birdeyeTradePortfolioProvider: Provider = {
     const chains = ['solana', 'base'];
 
     const portfolioData = (await runtime.getCache<Portfolio[]>('portfolio')) || [];
-    const portfolio = portfolioData?.data;
+    const portfolio = portfolioData?.data; // this is wrong
     /*
     wallet: "3nMBmufBUBVnk28sTp3NsrSJsdVGTyLZYmsqpMFaUT9J",
     totalUsd: 87.17431256926011,
