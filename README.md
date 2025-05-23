@@ -16,6 +16,7 @@ Spartan is a sophisticated DeFi agent with a range of capabilities, including:
 - Managing LP positions with optimal strategies.
 - Deploying autonomous trading tactics.
 
+
 Spartan always demands explicit confirmation before executing critical actions.
 
 ## Features
