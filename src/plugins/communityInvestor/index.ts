@@ -1,12 +1,36 @@
-import type { Plugin } from '@elizaos/core';
-import { getAgentPositions } from './recommendations/agentPositions';
-import { getTokenDetails } from './recommendations/analysis';
-import { confirmRecommendation } from './recommendations/confirm';
-import { recommendationEvaluator } from './recommendations/evaluator';
-import { getPositions } from './recommendations/positions';
-import { getRecommenderReport } from './recommendations/report';
-import { getSimulatedPositions } from './recommendations/simulatedPositions';
-import { CommunityInvestorService } from './tradingService';
+import { type Plugin, type IAgentRuntime, type Route } from '@elizaos/core';
+import { events } from './events';
+import { CommunityInvestorService } from './service';
+import { ServiceType } from './types'; // Assuming types.ts exports ServiceType or similar for service key
+
+// Placeholder for the actual handler logic
+async function getLeaderboardHandler(req: any, res: any, runtime: IAgentRuntime) {
+  try {
+    const service = runtime.getService<CommunityInvestorService>(ServiceType.COMMUNITY_INVESTOR);
+    if (!service) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'CommunityInvestorService not found' }));
+      return;
+    }
+    const leaderboardData = await service.getLeaderboardData(runtime);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(leaderboardData));
+  } catch (error) {
+    console.error('Error fetching leaderboard data:', error);
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Failed to fetch leaderboard data', details: error.message }));
+  }
+}
+
+const communityInvestorRoutes: Route[] = [
+  {
+    type: 'GET',
+    name: 'getCommunityInvestorLeaderboard',
+    path: '/leaderboard', // This will be prefixed by the plugin name, e.g., /community-investor/leaderboard
+    handler: getLeaderboardHandler,
+    public: true, // Assuming the leaderboard is publicly accessible
+  },
+];
 
 /**
  * Plugin representing the Community Investor Plugin for Eliza.
@@ -15,15 +39,7 @@ import { CommunityInvestorService } from './tradingService';
 export const communityInvestorPlugin: Plugin = {
   name: 'community-investor',
   description: 'Community Investor Plugin for Eliza',
-  evaluators: [recommendationEvaluator],
-  providers: [],
-  actions: [
-    confirmRecommendation,
-    getTokenDetails,
-    getRecommenderReport,
-    getPositions,
-    getAgentPositions,
-    getSimulatedPositions,
-  ],
+  events,
   services: [CommunityInvestorService],
+  routes: communityInvestorRoutes,
 };

@@ -2,14 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { Character, IAgentRuntime, OnboardingConfig, ProjectAgent } from '@elizaos/core';
 import dotenv from 'dotenv';
-import { initCharacter } from './init';
+import { initCharacter } from './init.js';
 import { communityInvestorPlugin } from './plugins/communityInvestor';
-import { degenIntelPlugin } from './plugins/degenIntel';
-import { degenTraderPlugin } from './plugins/degenTrader';
-import { heliusPlugin } from './plugins/helius';
-
-import { autofunPlugin } from './plugins/autofun';
-import { autofunTraderPlugin } from './plugins/autofunTrader';
 
 const imagePath = path.resolve('./src/spartan/assets/portrait.jpg');
 
@@ -40,15 +34,15 @@ const character: Character = {
     ...(process.env.ANTHROPIC_API_KEY ? ['@elizaos/plugin-anthropic'] : []),
     ...(process.env.OPENAI_API_KEY ? ['@elizaos/plugin-openai'] : []),
     ...(!process.env.OPENAI_API_KEY ? ['@elizaos/plugin-local-ai'] : []),
-    '@elizaos/plugin-discord',
-    '@elizaos/plugin-telegram',
-    '@elizaos/plugin-twitter',
-    '@elizaos/plugin-pdf',
-    '@elizaos/plugin-video-understanding',
+    // '@elizaos/plugin-discord',
+    // '@elizaos/plugin-telegram',
+    // '@elizaos/plugin-twitter',
+    // '@elizaos/plugin-pdf',
+    // '@elizaos/plugin-video-understanding',
     '@elizaos/plugin-bootstrap',
     // '@elizaos-plugins/plugin-degenTrader',
     // '@elizaos-plugins/plugin-jupiter',
-    '@elizaos/plugin-solana',
+    // '@elizaos/plugin-solana',
   ],
   settings: {
     GROQ_PLUGIN_LARGE:
@@ -540,14 +534,7 @@ const config: OnboardingConfig = {
 };
 
 export const spartan: ProjectAgent = {
-  plugins: [
-    heliusPlugin,
-    degenTraderPlugin,
-    degenIntelPlugin, // has to be after trader for buy/sell signals to be enabled
-    autofunPlugin,
-    autofunTraderPlugin,
-    communityInvestorPlugin,
-  ],
+  plugins: [communityInvestorPlugin],
   character,
   init: async (runtime: IAgentRuntime) => await initCharacter({ runtime, config }),
 };

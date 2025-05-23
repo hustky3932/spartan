@@ -9,6 +9,7 @@
 Spartan is your resident Solana-based DeFi trading warlord—a no-BS tactician who blends alpha with attitude. He's part shitposter, part protocol whisperer, and all about winning (even if it means dying on-chain for the memes).
 
 Spartan is a sophisticated DeFi agent with a range of capabilities, including:
+
 - Managing shared trading pools.
 - Executing trades across Solana DEXs (e.g., Orca, Raydium, Meteora).
 - Tracking token data and market trends using sources like Defined.fi.
@@ -22,10 +23,10 @@ Spartan always demands explicit confirmation before executing critical actions.
 
 - **Multi-Plugin Architecture**: Leverages various plugins for functionalities like SQL database interaction, AI model access (OpenAI, Anthropic, Groq, LocalAI), Discord/Telegram/Twitter integrations, PDF/video understanding, and Solana blockchain interactions.
 - **Trading Services**: Includes specialized services for different trading strategies and intelligence gathering:
-    - `CommunityInvestor`: Focuses on collaborative trading and recommendations.
-    - `DegenIntel`: Gathers and processes intelligence from various sources like Twitter, CoinMarketCap, and Birdeye.
-    - `DegenTrader` & `AutofunTrader`: Implement autonomous trading strategies.
-    - `Autofun`: Provides data from the auto.fun platform.
+  - `CommunityInvestor`: Focuses on collaborative trading and recommendations.
+  - `DegenIntel`: Gathers and processes intelligence from various sources like Twitter, CoinMarketCap, and Birdeye.
+  - `DegenTrader` & `AutofunTrader`: Implement autonomous trading strategies.
+  - `Autofun`: Provides data from the auto.fun platform.
 - **Task Management**: Uses a robust task system for scheduling and executing background operations like data syncing and signal generation.
 - **Comprehensive Data Handling**: Manages and caches data from various DeFi sources for efficient analysis and decision-making.
 - **Frontend Interface**: (For `DegenIntel`) A React-based frontend to visualize sentiment, trending tokens, wallet information, and more.
@@ -67,7 +68,7 @@ src
     │   ├── reports.ts
     │   ├── schemas.ts
     │   ├── tokenProvider.ts
-    │   ├── tradingService.ts
+    │   ├── service.ts
     │   ├── types.ts
     │   ├── utils.ts
     │   └── wallets
@@ -82,7 +83,7 @@ src
     │   ├── index.ts
     │   ├── services
     │   │   └── ... (various trading and data services)
-    │   ├── tradingService.ts
+    │   ├── service.ts
     │   ├── types
     │   │   └── ... (type definitions)
     │   └── utils
@@ -104,7 +105,7 @@ src
     │   ├── index.ts
     │   ├── services
     │   │   └── ...
-    │   ├── tradingService.ts
+    │   ├── service.ts
     │   ├── types
     │   │   └── ...
     │   └── utils
@@ -128,6 +129,7 @@ src
 ## Setup
 
 1.  **Clone the repository:**
+
     ```bash
     git clone <your-repository-url>
     cd spartan # Or your project's root directory
@@ -191,6 +193,7 @@ POSTGRES_URL=postgresql://user:password@host:port/database
 ```
 
 **Note on Wallet Keys:**
+
 - `SOLANA_PRIVATE_KEY` should be the base58 encoded string of your wallet's secret key.
 - Ensure the corresponding `SOLANA_PUBLIC_KEY` matches the public key derived from your private key.
 
@@ -213,6 +216,7 @@ As Spartan is designed as an agent within the Eliza OS framework, it's typically
 If you are developing a specific plugin or service, you might run parts of it in isolation or using the test environment provided in `plugins.test.ts`.
 
 For the `DegenIntel` frontend:
+
 1.  Ensure you have the necessary API endpoints running or configured.
 2.  Navigate to `src/plugins/degenIntel/frontend`.
 3.  Install dependencies if any are specific to this frontend (usually covered by the main install).
@@ -223,17 +227,18 @@ For the `DegenIntel` frontend:
 
 The Spartan agent is composed of several key plugins:
 
--   **`@elizaos/plugin-sql`**: Handles database interactions.
--   **AI Model Plugins** (`@elizaos/plugin-groq`, `@elizaos/plugin-anthropic`, `@elizaos/plugin-openai`, `@elizaos/plugin-local-ai`): Provide access to various large language models.
--   **Platform Plugins** (`@elizaos/plugin-discord`, `@elizaos/plugin-telegram`, `@elizaos/plugin-twitter`): Integrate with social and messaging platforms.
--   **Utility Plugins** (`@elizaos/plugin-pdf`, `@elizaos/plugin-video-understanding`, `@elizaos/plugin-bootstrap`): Offer various utility functions.
--   **`@elizaos/plugin-solana`**: Provides core Solana blockchain interaction capabilities.
+- **`@elizaos/plugin-sql`**: Handles database interactions.
+- **AI Model Plugins** (`@elizaos/plugin-groq`, `@elizaos/plugin-anthropic`, `@elizaos/plugin-openai`, `@elizaos/plugin-local-ai`): Provide access to various large language models.
+- **Platform Plugins** (`@elizaos/plugin-discord`, `@elizaos/plugin-telegram`, `@elizaos/plugin-twitter`): Integrate with social and messaging platforms.
+- **Utility Plugins** (`@elizaos/plugin-pdf`, `@elizaos/plugin-video-understanding`, `@elizaos/plugin-bootstrap`): Offer various utility functions.
+- **`@elizaos/plugin-solana`**: Provides core Solana blockchain interaction capabilities.
 
 Custom plugins specific to Spartan include:
--   **`communityInvestorPlugin`**: Manages community-driven investment strategies, recommendations, and performance tracking.
--   **`degenIntelPlugin`**: Focuses on gathering and analyzing market intelligence from sources like Twitter, CoinMarketCap, and Birdeye. It also includes a frontend for data visualization.
--   **`degenTraderPlugin`**: Implements core autonomous trading logic and strategies.
--   **`autofunPlugin`**: Integrates with the auto.fun platform for data and potentially trading.
--   **`autofunTraderPlugin`**: Specialized trading service for strategies related to the auto.fun platform.
+
+- **`communityInvestorPlugin`**: Manages community-driven investment strategies, recommendations, and performance tracking.
+- **`degenIntelPlugin`**: Focuses on gathering and analyzing market intelligence from sources like Twitter, CoinMarketCap, and Birdeye. It also includes a frontend for data visualization.
+- **`degenTraderPlugin`**: Implements core autonomous trading logic and strategies.
+- **`autofunPlugin`**: Integrates with the auto.fun platform for data and potentially trading.
+- **`autofunTraderPlugin`**: Specialized trading service for strategies related to the auto.fun platform.
 
 Each of these custom plugins further breaks down into services for specific tasks like data fetching, trade execution, analytics, and task management.

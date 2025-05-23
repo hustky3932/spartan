@@ -1,4 +1,4 @@
-import type { CacheOptions, IAgentRuntime } from '@elizaos/core';
+import type { IAgentRuntime } from '@elizaos/core';
 import BigNumber from 'bignumber.js';
 import * as dotenv from 'dotenv';
 import { BTC_ADDRESS, ETH_ADDRESS, SOL_ADDRESS } from './constants';
@@ -340,7 +340,7 @@ export class JupiterClient {
  * @property {string|CacheOptions["expires"]} [expires] - The expiration time for the cache.
  */
 type DexscreenerOptions = {
-  expires?: string | CacheOptions['expires'];
+  expires?: string;
 };
 
 /**
@@ -503,10 +503,7 @@ export class HeliusClient {
    *
    * @returns {Promise<HolderData[]>} A promise that resolves to an array of HolderData objects representing the token holders.
    */
-  async fetchHolderList(
-    address: string,
-    options?: { expires?: string | CacheOptions['expires'] }
-  ): Promise<HolderData[]> {
+  async fetchHolderList(address: string, options?: { expires?: string }): Promise<HolderData[]> {
     if (options?.expires) {
       const cached = await this.runtime.getCache<HolderData[]>(`helius/token-holders/${address}`);
 
@@ -586,7 +583,7 @@ export class HeliusClient {
  * @property {string | CacheOptions["expires"]} [expires] - The expiration date for the cache.
  */
 type CoingeckoOptions = {
-  expires?: string | CacheOptions['expires'];
+  expires?: string;
 };
 
 /**
@@ -760,7 +757,7 @@ type BirdeyeClientHeaders = {
 
 type BirdeyeRequestOptions = {
   chain?: BirdeyeXChain;
-  expires?: string | CacheOptions['expires'];
+  expires?: string;
 };
 
 /**
